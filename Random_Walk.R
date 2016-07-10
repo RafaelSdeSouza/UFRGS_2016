@@ -20,10 +20,10 @@ plot_RW(50,20)
 # Plot a histogram of the final position
 plot_hist<-function(nsim,N){
 par(new=F)
-pos <- replicate(nsim,cumsum(runif(N,-1,1)) ) 
+pos <- replicate(nsim,sum(runif(N,-1,1)) ) 
 hist(pos)
 }
 
-plot_hist(50,20)
+plot_hist(500,20)
 
 
