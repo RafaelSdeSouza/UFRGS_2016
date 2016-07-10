@@ -1,0 +1,217 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="chrome=1">
+    <title>Ufrgs 2016 by RafaelSdeSouza</title>
+
+    <link rel="stylesheet" href="stylesheets/styles.css">
+    <link rel="stylesheet" href="stylesheets/github-light.css">
+    <script src="javascripts/scale.fix.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no">
+    <!--[if lt IE 9]>
+    <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+    <div class="wrapper">
+      <header>
+        <h1 class="header">Ufrgs 2016</h1>
+        <p class="header"></p>
+
+        <ul>
+          <li class="download"><a class="buttons" href="https://github.com/RafaelSdeSouza/UFRGS_2016/zipball/master">Download ZIP</a></li>
+          <li class="download"><a class="buttons" href="https://github.com/RafaelSdeSouza/UFRGS_2016/tarball/master">Download TAR</a></li>
+          <li><a class="buttons github" href="https://github.com/RafaelSdeSouza/UFRGS_2016">View On GitHub</a></li>
+        </ul>
+
+        <p class="header">This project is maintained by <a class="header name" href="https://github.com/RafaelSdeSouza">RafaelSdeSouza</a></p>
+
+
+      </header>
+      <section>
+        <p><img src="https://raw.githubusercontent.com/RafaelSdeSouza/ADA8/master/images/COIN.png" width="800" align="right"></p>
+
+<h1>
+<a id="brief-tutorial-on-bayesian-modeling" class="anchor" href="#brief-tutorial-on-bayesian-modeling" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Brief Tutorial on Bayesian Modeling</h1>
+
+<h2>
+<a id="instituto-de-física-ufrgs---july-12-13-2016---porto-alegre-brazil" class="anchor" href="#instituto-de-f%C3%ADsica-ufrgs---july-12-13-2016---porto-alegre-brazil" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Instituto de Física-UFRGS - July 12-13, 2016 - Porto Alegre, Brazil</h2>
+
+<p>Tutorial presented during at UFRGS from July 12-13.</p>
+
+<p>This repository holds  the scripts used to illustrate the theoretical concepts of Bayesian Modeling using synthetic and real data.</p>
+
+<p>If you use any of the resources presented here, please include the appropriate citation. 
+Each folder holds scripts for a different probability distribution, references and the corresponding bibtex entry. </p>
+
+<p>Most of the material presented here will be presented with deeper discussions and further examples in our book to be released in late 2016:</p>
+
+<p><em>Bayesian Models for Astrophysical Data: using R/JAGS and Python/Stan</em><br>
+Hilbe, de Souza and Ishida, <em>in prep</em>, Cambridge University Press  </p>
+
+<h3>
+<a id="getting-started" class="anchor" href="#getting-started" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Getting Started</h3>
+
+<p>The tutorial is composed of theoretical and practical modules. </p>
+
+<p>The examples will be demonstrated in R but <em>familiarity with the language is not a requirement</em>.</p>
+
+<p>In order to optimize the time spent in the examples and practical applications, I advise the participants to get the following software up and running in advance.</p>
+
+<ul>
+<li>Jags      -   <a href="http://mcmc-jags.sourceforge.net">http://mcmc-jags.sourceforge.net</a>
+</li>
+<li>R         -   <a href="https://www.r-project.org">https://www.r-project.org</a>
+</li>
+<li>Rstudio   -   <a href="https://www.rstudio.com">https://www.rstudio.com</a>
+</li>
+</ul>
+
+<p><strong>For Linux users</strong></p>
+
+<p>If you are using Linux, make sure to add the appropriate repository before installing.  </p>
+
+<p>Open the file <code>/etc/apt/sources.list</code> with your favorite text editor and add the following line:</p>
+
+<pre><code>deb http://cran.cnr.berkeley.edu/bin/linux/ubuntu trusty/
+</code></pre>
+
+<p>For deeper instructions and other Linux flavours see <a href="https://cran.r-project.org/bin/linux/ubuntu/README">this page</a>.</p>
+
+<p>Then, in the command line do:</p>
+
+<pre><code>sudo apt-get update
+</code></pre>
+
+<p>Do not worry if you got a couple of error messages. This is not significant for our purpouses. The other steps should work as planned despite of them.  </p>
+
+<p>To install R and JAGS go to the command line and type:</p>
+
+<pre><code>sudo apt-get install r-base
+sudo apt-get install jags
+</code></pre>
+
+<p>In order to get Rstudio choose the appropriate version from <a href="https://www.rstudio.com/products/rstudio/download/">this page</a>.</p>
+
+<p>After download is completed double click in the <code>.deb</code> file. This will automatically open Ubuntu Software Center. Click on Install.    </p>
+
+<p><strong>R packages</strong></p>
+
+<p>Once Rstudio is installed you will need a few R packages. </p>
+
+<p>These can be done in 2 ways:</p>
+
+<ul>
+<li>
+<p>Using Rstudio toolbar:</p>
+
+<p>-Tools -&gt; Install packages</p>
+
+<p>A window will pop-up where you can select:</p>
+
+<p>Choose from:  </p>
+
+<pre><code>Repository (CRAN)
+</code></pre>
+
+<p>Packages (separate multiple with space or comma):</p>
+
+<pre><code>R2jags, MASS, Scales, mcmcplots, ggplot2, plot3D 
+</code></pre>
+</li>
+<li>
+<p>Alternatively, you can simply type in the Rstudio console window</p>
+
+<div class="highlight highlight-source-r"><pre><span class="pl-smi">pac</span> <span class="pl-k">&lt;-</span>c(<span class="pl-s"><span class="pl-pds">"</span>R2jags<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>MASS<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>scales<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>mcmcplots<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>ggplot2<span class="pl-pds">"</span></span>,<span class="pl-s"><span class="pl-pds">"</span>plot3D<span class="pl-pds">"</span></span>);
+install.packages(<span class="pl-smi">pac</span>,<span class="pl-v">dependencies</span><span class="pl-k">=</span><span class="pl-c1">T</span>)</pre></div>
+</li>
+</ul>
+
+<p><strong>Getting the scripts</strong></p>
+
+<p>In order to avoid problems with file paths it is advisable to clone this repository and work within it.  </p>
+
+<p>To do so choose go to the command line and navigate to a location where you would like to work. Then type:</p>
+
+<pre><code>git clone https://github.com/RafaelSdeSouza/ADA8.git
+</code></pre>
+
+<p>This should be enough to get you ready for the examples we will be working on. </p>
+
+<p>If you do not have git installed you can get it typing:</p>
+
+<pre><code>sudo apt-get install git
+</code></pre>
+
+<p><strong>Staying up to date</strong></p>
+
+<p>This is a work in progress and it will be continuously updated so erros can be fixed and complementary material can be added. </p>
+
+<p>It is advisable to make sure you have the latest version before start working in you local directory. To do so, in the command line navigate to your copy of this repository and type:</p>
+
+<pre><code>git pull 
+</code></pre>
+
+<p>Then you are certain to get all the bug fixes and improvements available.</p>
+
+<p>Have fun!</p>
+
+<h3>
+<a id="chapter-1----gaussian-models" class="anchor" href="#chapter-1----gaussian-models" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Chapter 1  - Gaussian models</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Normal_distribution">Wikipedia</a></p>
+
+<p><a href="https://github.com/RafaelSdeSouza/ADA8/tree/master/Normal">Tutorial Examples</a></p>
+
+<h3>
+<a id="chapter-2---bernoulli-models" class="anchor" href="#chapter-2---bernoulli-models" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Chapter 2 - Bernoulli models</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Bernoulli_distribution">Wikipedia</a></p>
+
+<p><a href="https://github.com/RafaelSdeSouza/ADA8/tree/master/Bernoulli">Tutorial Examples</a></p>
+
+<h3>
+<a id="chapter-3---count-models" class="anchor" href="#chapter-3---count-models" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Chapter 3 - Count models</h3>
+
+<p><a href="https://en.wikipedia.org/wiki/Count_data">Wikipedia</a></p>
+
+<p><a href="https://github.com/RafaelSdeSouza/ADA8/tree/master/Count_models">Tutorial Examples</a></p>
+
+<h3>
+<a id="presentation-slides" class="anchor" href="#presentation-slides" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Presentation Slides</h3>
+
+<p>The slides used in this tutorial are available <a href="https://github.com/RafaelSdeSouza/ADA8/blob/master/Slides/ada-tutorial.pdf">here</a>.</p>
+
+<h3>
+<a id="references" class="anchor" href="#references" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>References</h3>
+
+<p>de Souza <em>et al</em>, 2016, <em>Is the cluster environment quenching the Seyfert activity in elliptical and spiral galaxies?</em>, <a href="http://adsabs.harvard.edu/abs/2016arXiv160306256D">arxiv:astro-ph/1603.06256</a>, <a href="https://github.com/RafaelSdeSouza/ADA8/tree/master/bib/deSouza_2016.bib">BibTex</a>  </p>
+
+<p>de Souza <em>et al</em>, 2015, <em>The overlooked potential of generalized linear models in astronomy - III. Bayesian negative binomial regression and globular cluster populations</em>, <a href="http://adsabs.harvard.edu/abs/2015MNRAS.453.1928D">MNRAS, 453, p.1928-1940</a>, <a href="https://github.com/RafaelSdeSouza/ADA8/tree/master/bib/deSouza_2015_GLMIII.bib">BibTex</a>  </p>
+
+<p>Elliot <em>et al</em>, 2015, <em>The overlooked potential of Generalized Linear Models in astronomy-II: Gamma regression and photometric redshifts</em>, <a href="http://adsabs.harvard.edu/abs/2015A%26C....10...61E">Astronomy &amp; Computing, 10, p. 61-72</a>, <a href="https://github.com/RafaelSdeSouza/ADA8/tree/master/bib/Elliot_2015_GLMII.bib">BibTex</a>  </p>
+
+<p>de Souza <em>et al</em>, 2015, <em>The overlooked potential of Generalized Linear Models in astronomy, I: Binomial regression</em>, <a href="http://adsabs.harvard.edu/abs/2015A%26C....12...21D">Astronomy &amp; Computing, 12, p. 21-32</a>, <a href="https://github.com/RafaelSdeSouza/ADA8/tree/master/deSouza_2015_GLMI.bib">BibTex</a>  </p>
+
+<p>Hilbe, 2014, <em>Modeling Count Data</em>, <a href="http://www.cambridge.org/mq/academic/subjects/statistics-probability/statistical-theory-and-methods/modeling-count-data">Cambridge University Press</a>, <a href="https://github.com/RafaelSdeSouza/ADA8/tree/master/bib/Hilbe_2014.bib">BibTex</a>  </p>
+
+<p>Hilbe, 2011, <em>Negative Binomial Regression</em>, <a href="http://www.cambridge.org/mq/academic/subjects/statistics-probability/statistical-theory-and-methods/negative-binomial-regression-2nd-edition?format=HB&amp;isbn=9780521198158">Cambridge University Press</a>, <a href="https://github.com/RafaelSdeSouza/ADA8/tree/master/bib/Hilbe_2011.bib">BibTex</a></p>
+
+<h3>
+<a id="author" class="anchor" href="#author" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Author</h3>
+
+<p><strong><em>Rafael da Silva de Souza, PhD</em></strong></p>
+
+<p><a href="http://rafael2706.wix.com/rafaelsdesouza">Researcher - ELTE, Hungary</a><br>
+<a href="https://asaip.psu.edu/organizations/iaa/iaa-working-group-of-cosmostatistics">Head and founder - The COsmostatistics INitiative (COIN)</a><br>
+<a href="http://iaa.mi.oa-brera.inaf.it/adm_program/modules/announcements/announcements.php">Vice-president for development - The International Astrostatistics Association (IAA)</a>  </p>
+      </section>
+      <footer>
+        <p><small>Hosted on <a href="https://pages.github.com">GitHub Pages</a> using the Dinky theme</small></p>
+      </footer>
+    </div>
+    <!--[if !IE]><script>fixScale(document);</script><![endif]-->
+		
+  </body>
+</html>
