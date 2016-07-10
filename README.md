@@ -1,10 +1,10 @@
 <img src="https://raw.githubusercontent.com/RafaelSdeSouza/ADA8/master/images/COIN.png" width="800" align="right">
 
-# Tutorial on Bayesian Modeling #
-## [ADA8 Summer School](http://ada8.cosmostat.org) - May 23rd, 2016 - Chania, Greece ##
+# Brief Tutorial on Bayesian Modeling #
+## Instituto de Física-UFRGS - July 12-13, 2016 - Porto Alegre, Brazil ##
 
 
-Tutorial presented during the 8th Astronomical Data Analysis Summer School.
+Tutorial presented during at UFRGS from July 12-13.
 
 This repository holds  the scripts used to illustrate the theoretical concepts of Bayesian Modeling using synthetic and real data.
 
