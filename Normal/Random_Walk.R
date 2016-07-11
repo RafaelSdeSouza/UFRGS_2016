@@ -21,9 +21,18 @@ plot_RW(50,20)
 plot_hist<-function(nsim,N){
 par(new=F)
 pos <- replicate(nsim,sum(runif(N,-1,1)) ) 
-hist(pos)
+hist(pos,main=paste("N=",nsim,sep=""),col = "green3")
 }
 
-plot_hist(500,20)
 
+
+par(mfrow = c(2, 3))
+par(cex = 0.6)
+par(mar = c(3, 3, 2, 2), oma = c(1, 1, 1, 1))
+plot_hist(5,20)
+plot_hist(10,20)
+plot_hist(50,20)
+plot_hist(100,20)
+plot_hist(500,20)
+plot_hist(2500,20)
 
