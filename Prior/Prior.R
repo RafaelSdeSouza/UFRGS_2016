@@ -26,7 +26,7 @@ notatooine <- (1-ftatooine_new)*nobs_new
 
 x = seq(0.005, 0.995, length = 500)
 like <- dbeta(x,tatooine+1,notatooine+1)
-plot(x,like,type="l",col="blue")
+plot(x,like,type="l",col="blue",ylab="Likelihood",xlab=expression(f[Tatooine]))
 abline(v=0.75,lty=3,lwd=2)
 
 
