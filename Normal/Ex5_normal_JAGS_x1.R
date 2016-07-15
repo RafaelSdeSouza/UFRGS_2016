@@ -29,12 +29,12 @@ xx = seq(from =  min(x1),
 
 
 # prepare data for JAGS input
-X <- model.matrix(~ 1 + x1)
-K <- ncol(X)
+#X <- model.matrix(~ 1 + x1)
+#K <- ncol(X)
 
 jags_data <- list(Y = y,
-                  X  = X,
-                  K  = K,
+                  X  = x1,
+                  K  = 2,
                   N  = nobs,
                   M = M,
                   xx= xx)
@@ -46,14 +46,15 @@ NORM <-" model{
     for (i in 1:K) { beta[i] ~ dnorm(0, 0.0001) }
     
    # Uniform prior for standard deviation
+    sigma ~ dunif(0, 100)       # standard deviation
      tau <- pow(sigma, -2)       # precision
-     sigma ~ dunif(0, 100)       # standard deviation
+   
    
     # Likelihood function 
     for (i in 1:N){
     Y[i]~dnorm(mu[i],tau)
     mu[i]  <- eta[i]
-    eta[i] <- beta[1]+beta[2]*X[i,2]
+    eta[i] <- beta[1]+beta[2]*X[i]
     }
 
    # Prediction for new data
@@ -67,12 +68,12 @@ NORM <-" model{
 # set initial values
 inits <- function () {
   list(
-    beta = rnorm(K, 0, 0.01))
+    beta = rnorm(2, 0, 0.01))
 }
 
 # define parameters
-#params <- c("beta", "sigma","Yx")
 params <- c("beta", "sigma","Yx")
+#params <- c("beta", "sigma")
 
 
 jagsfit <- jags(
@@ -98,6 +99,10 @@ denplot(jagsfit)
 # Plot
 yx <- jagsresults(x=jagsfit, params=c('Yx'))
 
+#S<-ggs(as.mcmc(jagsfit))
+
+
+ggs_pairs(ggs(S))
 
 normdata <- data.frame(x1,y)
 gdata <- data.frame(x =xx, mean = yx[,"mean"],lwr1=yx[,"25%"],lwr2=yx[,"2.5%"],upr1=yx[,"75%"],upr2=yx[,"97.5%"])

@@ -2,8 +2,8 @@
 
 # Sample size
 nobs <- 100
-ftatooine <- 0.65
-# 70% are spiral
+ftatooine <- 0.15
+#
 
 #Prior
 alpha <- 1+ftatooine*nobs
@@ -16,6 +16,7 @@ plot(x,y, type="l",ylab="prior",xlab=expression(f[Tatooine]),col="blue",lwd=3)
 abline(v=0.65,lty=3,lwd=2)
 
 prior <- dbeta(x,alpha,beta)
+
 
 # 20 obs 
 nobs_new <- 20
@@ -60,3 +61,5 @@ lines(x,prior,lty=3, lwd=3,col="green")
 legend("topleft",c("Prior","Likelihood","Posterior",paste("Nobs=",v_obs[i]*tatooine+v_obs[i]*notatooine,sep="")),
        lty=c(3,1,2,1), lwd=c(3,3,3,0), col=c("green","blue","red"))
 }
+
+

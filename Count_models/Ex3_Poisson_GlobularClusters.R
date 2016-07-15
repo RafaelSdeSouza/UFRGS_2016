@@ -70,7 +70,7 @@ inits  <- function () {
   )  }
 
 # define parameters
-params <- c("beta","Yx")
+params <- c("beta","mux")
 
 # fit
 Pois <- jags(data       = jags_data ,
@@ -86,7 +86,7 @@ Pois <- jags(data       = jags_data ,
 jagsresults(Pois , params=c("beta"))
 
 # plot
-yx <- jagsresults(Pois, params=c('Yx'))
+yx <- jagsresults(Pois, params=c('mux'))
 
 gdata <- data.frame(x=xx, mean = yx[,"50%"],lwr1=yx[,"25%"],lwr2=yx[,"2.5%"],upr1=yx[,"75%"],upr2=yx[,"97.5%"])
 

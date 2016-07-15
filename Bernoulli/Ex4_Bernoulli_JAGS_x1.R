@@ -1,4 +1,4 @@
-# ADA8 – Astronomical Data Analysis Summer School
+# Astronomical Data Analysis Summer School
 # Bayesian tutorial by Rafael S. de Souza - ELTE, Hungary & COIN
 #
 # Partial example from Bayesian Models for Astrophysical Data 
@@ -79,7 +79,7 @@ jagsfit<- jags(data       = logit_data,
                n.chains   = 3,
                n.burnin   = 5000,
                n.iter     = 10000)
-traplot(jagsfit,c("beta"))
+#traplot(jagsfit,c("beta"))
 
 # check results
 print(jagsfit,intervals=c(0.025, 0.975),justify = "left", digits=2)

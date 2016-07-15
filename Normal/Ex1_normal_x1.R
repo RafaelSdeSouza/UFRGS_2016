@@ -12,8 +12,10 @@
 set.seed(1056)                    # set seed to replicate example
 nobs= 100                         # number of observations 
 x1 <- runif(nobs)                 # random uniform variable
-mu <- 1 + 3*x1                    # linear predictor
-y <- rnorm(nobs, mu, sd=0.25)     # create y as adjusted random normal variate 
+mu <- -1 + 6*x1                    # linear predictor
+y <- rnorm(nobs, mu, sd=2)     # create y as adjusted random normal variate 
+
+plot(x1,y)
 
 # Fit model
 fit <- lm(y ~ x1)                 # Normal Fit of the synthetic data. 
@@ -25,5 +27,4 @@ ypred <- predict(fit,newdata=list(x1=xx),type="response") # Prediction from the 
  
 plot(x1,y,pch=19,col="red")                               # Plot regression line
 lines(xx,ypred,col='cyan',lwd=4,lty=2)
-
 segments(x1,fitted(fit),x1,y,lwd=2,col="gray")            # Add the residuals
